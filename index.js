@@ -15,7 +15,7 @@ const main = async () => {
         const payload = JSON.stringify(github.context.payload, undefined, 2)
         console.log(`The event payload: ${payload}`);
 
-        const tags_url = "GET ".concat(JSON.stringify(github.context.payload.repository.tags_url, undefined, 2))
+        const tags_url = 'GET ' + JSON.stringify(github.context.payload.repository.tags_url, undefined, 2))
         console.log(`tags_url: ${tags_url}`);
 
         const tags = await octokit.request(tags_url)
