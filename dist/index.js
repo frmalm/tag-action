@@ -9700,12 +9700,11 @@ const main = async () => {
         // Get the JSON webhook payload for the event that triggered the workflow
         const payload = JSON.stringify(github.context.payload, undefined, 2)
         console.log(`The event payload: ${payload}`);
-        
-        const repository = JSON.parse(github.context.payload.repository)
-        
-        console.log(`tags_url: ${repository.tags_url}`);
 
-        const tags = await octokit.request(repository.tags_url)
+        
+        console.log(`tags_url: ${github.context.payload.repository.tags_url}`);
+
+        const tags = await octokit.request(github.context.payload.repository.tags_url)
         
         console.log(`tags: ${tags}`);
 
