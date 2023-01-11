@@ -9701,13 +9701,13 @@ const main = async () => {
         const payload = JSON.stringify(github.context.payload, undefined, 2)
         console.log(`The event payload: ${payload}`);
 
-        const branches_url = JSON.stringify(github.context.payload.repository.branches_url, undefined, 2)
-        console.log(`branches_url: ${branches_url}`);
+        const tags_url = JSON.stringify(github.context.payload.repository.tags_url, undefined, 2)
+        console.log(`tags_url: ${tags_url}`);
 
-        const branches = await octokit.request('GET {url}', {
-            url: branches_url
+        const tags = await octokit.request('GET {url}', {
+            url: tags_url
         })
-        console.log(`branches: ${branches}`);
+        console.log(`tags: ${tags}`);
 
     } catch (error) {
         core.setFailed(error.message);
