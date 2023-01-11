@@ -9738,7 +9738,7 @@ const main = async () => {
 
         console.log(`New tag : ${newTag} for ${sha}`);
         
-        await octokit.request('POST /repos/{owner}/{repo}/git/tags', {
+        const response = await octokit.request('POST /repos/{owner}/{repo}/git/tags', {
             owner : owner,
             repo : repo,
             tag: newTag,
@@ -9750,8 +9750,8 @@ const main = async () => {
                 email: 'octocat@github.com',
                 date: '2011-06-17T14:53:35-07:00'
             }
-        })
-
+        });
+        console.log(response);
     } catch (error) {
         core.setFailed(error.message);
     }
