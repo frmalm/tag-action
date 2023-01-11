@@ -9738,6 +9738,13 @@ const main = async () => {
 
 
         console.log(`New tag : ${newTag} for ${sha}`);
+        
+        await octokit.request('POST ${github.context.payload.repository.tags_url}', {
+            tag: newTag,
+            object: 'c3d0be41ecbe669545ee3e94d31ed9a4bc91ee3c',
+            type: 'commit',
+        })
+
     } catch (error) {
         core.setFailed(error.message);
     }
