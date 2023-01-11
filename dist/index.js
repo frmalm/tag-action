@@ -9693,9 +9693,9 @@ function getNextBuild(prefix, major, tagNames) {
 
     next = 1
     for(let tag of tagNames) {
-        console.log(tag)
+        //console.log(tag)
         let fullPrefix = prefix + major + "."
-        console.log(fullPrefix)
+        //console.log(fullPrefix)
         if(tag.startsWith(fullPrefix)) {
             build = Number(tag.substring(fullPrefix.length))
             if(build >= next) {
@@ -9703,7 +9703,7 @@ function getNextBuild(prefix, major, tagNames) {
             }
         }
     }
-    console.log("Next build number : " + next)
+    //console.log("Next build number : " + next)
     return next
 }
 
@@ -9725,7 +9725,7 @@ const main = async () => {
         console.log(`tags_url: ${github.context.payload.repository.tags_url}`);
 
         const tags = await octokit.request(github.context.payload.repository.tags_url)
-        console.log(tags.data);
+        //console.log(tags.data);
         
         var tagNames = tags.data.map(function(tag) {
             return tag.name
