@@ -9696,7 +9696,11 @@ const main = async () => {
         const ocktokit = new github.getOctokit(token);
 
 
-        console.log(`Created a tag with profix ${prefix}${major}.`);
+        console.log(`Created a tag with profix "${prefix}${major}."`);
+
+        // Get the JSON webhook payload for the event that triggered the workflow
+        const payload = JSON.stringify(github.context.payload, undefined, 2)
+        console.log(`The event payload: ${payload}`);
 
     } catch (error) {
         core.setFailed(error.message);
