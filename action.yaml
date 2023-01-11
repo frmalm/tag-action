@@ -5,8 +5,8 @@ inputs:
     description: 'Prefix on tag'
     required: true
   major:
-      description: 'Major release version'
-      required: true
+    description: 'Major release version'
+    required: true
   token:
     description: 'The token to use to access the GitHub API'
     required: true
