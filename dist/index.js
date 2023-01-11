@@ -9687,16 +9687,9 @@ var __webpack_exports__ = {};
 const core = __nccwpck_require__(2186);
 const github = __nccwpck_require__(5438);
 
-function getTagNamesOfTags(tags) {
-    var tagNames = tags.map(function(tag) {
-        tag.name
-    })
-
-
-}
 
 function getNextBuild(prefix, major, tagNames) {
-    console.log(tags);
+    console.log(tagNames);
 
     next = 1
     for(let tag of tagNames) {
@@ -9708,8 +9701,6 @@ function getNextBuild(prefix, major, tagNames) {
             if(build >= next) {
                 next = build + 1
             }
-
-
         }
     }
     console.log("Next build number : " + next)

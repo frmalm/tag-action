@@ -1,16 +1,9 @@
 const core = require('@actions/core');
 const github = require('@actions/github');
 
-function getTagNamesOfTags(tags) {
-    var tagNames = tags.map(function(tag) {
-        tag.name
-    })
-
-
-}
 
 function getNextBuild(prefix, major, tagNames) {
-    console.log(tags);
+    console.log(tagNames);
 
     next = 1
     for(let tag of tagNames) {
@@ -22,8 +15,6 @@ function getNextBuild(prefix, major, tagNames) {
             if(build >= next) {
                 next = build + 1
             }
-
-
         }
     }
     console.log("Next build number : " + next)
