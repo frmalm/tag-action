@@ -9690,13 +9690,13 @@ const github = __nccwpck_require__(5438);
 const main = async () => {
     try {
         const prefix = core.getInput('prefix', { required: true });
+        const major = core.getInput('major', { required: true });
         const token = core.getInput('token', { required: true });
 
-        const octokit = new github.getOctokit(token);
-
-        octokit.log.info("hello")
+        const ocktokit = new github.getOctokit(token);
 
 
+        console.log("Created a tag with profix ${prefix}${major}.");
 
     } catch (error) {
         core.setFailed(error.message);
