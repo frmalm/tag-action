@@ -20,7 +20,8 @@ const main = async () => {
 
         const tags = await octokit.request(github.context.payload.repository.tags_url)
         
-        console.log(`tags: ${tags}`);
+        const tagJson = JSON.stringify(tags, undefined, 2)
+        console.log(`tags: ${tagJson}`);
 
     } catch (error) {
         core.setFailed(error.message);
