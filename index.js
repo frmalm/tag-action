@@ -37,12 +37,7 @@ const main = async () => {
         console.log(`tags_url: ${github.context.payload.repository.tags_url}`);
 
         const [owner, repo] = github.context.payload.repository.full_name.split("/")
-        //const tags = await octokit.request(github.context.payload.repository.tags_url)
-
-        const tags = await octokit.request('GET /repos/{owner}/{repo}/git/tags/{tag_sha}', {
-            owner: owner,
-            repo: repo
-        })
+        const tags = await octokit.request(github.context.payload.repository.tags_url)
         
         console.log(tags.data);
         
@@ -58,11 +53,12 @@ const main = async () => {
 
         console.log(`New tag : ${newTag} for ${sha}`);
         
-        await octokit.request('POST ${github.context.payload.repository.tags_url}', {
+        await octokit.request('POST /repos/{owner}/{repo}/git/tags', {
+            owner : owner,
+            repo : repo,
             tag: newTag,
-            message: `Created new tag ${newTag}`
             object: sha,
-            type: 'commit',
+            type: 'commit'
         })
 
     } catch (error) {
