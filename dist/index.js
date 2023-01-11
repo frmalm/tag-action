@@ -9695,7 +9695,7 @@ const main = async () => {
 
         console.log(`Created a tag with profix "${prefix}${major}."`);
 
-        const ocktokit = new github.getOctokit(token);
+        const octokit = new github.getOctokit(token);
         
         // Get the JSON webhook payload for the event that triggered the workflow
         const payload = JSON.stringify(github.context.payload, undefined, 2)
