@@ -34,12 +34,17 @@ const main = async () => {
         // Get the JSON webhook payload for the event that triggered the workflow
         const payload = JSON.stringify(github.context.payload, undefined, 2)
         console.log(`The event payload: ${payload}`);
-
-        
         console.log(`tags_url: ${github.context.payload.repository.tags_url}`);
 
-        const tags = await octokit.request(github.context.payload.repository.tags_url)
-        //console.log(tags.data);
+        const [owner, repo] = github.context.payload.repository.full_name.split("/")
+        //const tags = await octokit.request(github.context.payload.repository.tags_url)
+
+        const tags = await octokit.request('GET /repos/{owner}/{repo}/git/tags/{tag_sha}', {
+            owner: owner,
+            repo: repo
+        })
+        
+        console.log(tags.data);
         
         var tagNames = tags.data.map(function(tag) {
             return tag.name
@@ -55,7 +60,8 @@ const main = async () => {
         
         await octokit.request('POST ${github.context.payload.repository.tags_url}', {
             tag: newTag,
-            object: 'c3d0be41ecbe669545ee3e94d31ed9a4bc91ee3c',
+            message: `Created new tag ${newTag}`
+            object: sha,
             type: 'commit',
         })
 
