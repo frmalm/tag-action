@@ -15,10 +15,13 @@ const main = async () => {
         const payload = JSON.stringify(github.context.payload, undefined, 2)
         console.log(`The event payload: ${payload}`);
 
+        const branches_url = JSON.stringify(github.context.payload.repository.branches_url, undefined, 2)
+        console.log(`branches_url: ${branches_url}`);
+
         const branches = await octokit.request('GET {url}', {
-            url: github.context.payload.repository.branches_url
+            url: branches_url
         })
-        console.log(`The event payload: ${branches}`);
+        console.log(`branches: ${branches}`);
 
     } catch (error) {
         core.setFailed(error.message);
