@@ -57,6 +57,7 @@ const main = async () => {
             owner : owner,
             repo : repo,
             tag: newTag,
+            message: `Created new tag ${newTag}`
             object: sha,
             type: 'commit'
         })
