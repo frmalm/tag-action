@@ -9733,7 +9733,9 @@ const main = async () => {
         
         console.log(`tags_url: ${github.context.payload.repository.tags_url}`);
 
-        const tags = await octokit.request(github.context.payload.repository.tags_url)
+        const tags = JSON.parse(await octokit.request(github.context.payload.repository.tags_url))
+        
+        
         var tagNames = tags.map(function(tag) {
             return tag.name
         });
