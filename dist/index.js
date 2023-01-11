@@ -9724,8 +9724,7 @@ const main = async () => {
 
         const [owner, repo] = github.context.payload.repository.full_name.split("/")
         const tags = await octokit.request(github.context.payload.repository.tags_url)
-        
-        console.log(tags.data);
+        //console.log(tags.data);
         
         var tagNames = tags.data.map(function(tag) {
             return tag.name
@@ -9743,8 +9742,14 @@ const main = async () => {
             owner : owner,
             repo : repo,
             tag: newTag,
+            message: `Created new tag ${newTag}`,
             object: sha,
-            type: 'commit'
+            type: 'commit',
+            tagger: {
+                name: 'Monalisa Octocat',
+                email: 'octocat@github.com',
+                date: '2011-06-17T14:53:35-07:00'
+            }
         })
 
     } catch (error) {
