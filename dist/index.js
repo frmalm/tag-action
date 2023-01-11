@@ -9696,7 +9696,7 @@ const main = async () => {
         const ocktokit = new github.getOctokit(token);
 
 
-        console.log("Created a tag with profix ${prefix}${major}.");
+        console.log(`Created a tag with profix ${prefix}${major}.`);
 
     } catch (error) {
         core.setFailed(error.message);
