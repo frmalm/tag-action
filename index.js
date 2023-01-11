@@ -50,7 +50,7 @@ const main = async () => {
         const tags = await octokit.request(github.context.payload.repository.tags_url)
         console.log(tags.data);
         
-        var tagNames = tags.map(function(tag.data) {
+        var tagNames = tags.data.map(function(tag) {
             return tag.name
         });
         
