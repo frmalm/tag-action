@@ -9693,14 +9693,18 @@ const main = async () => {
         const major = core.getInput('major', { required: true });
         const token = core.getInput('token', { required: true });
 
-        const ocktokit = new github.getOctokit(token);
-
-
         console.log(`Created a tag with profix "${prefix}${major}."`);
 
+        const ocktokit = new github.getOctokit(token);
+        
         // Get the JSON webhook payload for the event that triggered the workflow
         const payload = JSON.stringify(github.context.payload, undefined, 2)
         console.log(`The event payload: ${payload}`);
+
+        const branches = await octokit.request('GET {url}', {
+            url: github.context.payload.repository.branches_url
+        })
+        console.log(`The event payload: ${branches}`);
 
     } catch (error) {
         core.setFailed(error.message);
