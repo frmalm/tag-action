@@ -61,8 +61,7 @@ const main = async () => {
             type: 'commit',
             tagger: {
                 name: 'Monalisa Octocat',
-                email: 'octocat@github.com',
-                date: '2011-06-17T14:53:35-07:00'
+                email: 'octocat@github.com'
             }
         });
         console.log(response);
