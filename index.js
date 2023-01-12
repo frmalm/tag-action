@@ -50,6 +50,8 @@ const main = async () => {
                 repo : repo,
                 ref: github.context.payload.ref,
             });
+
+            console.log(`The event refResponse: ${refResponse}`);
             
             sha = refResponse.object.sha;
         }
