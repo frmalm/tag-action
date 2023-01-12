@@ -9744,11 +9744,7 @@ const main = async () => {
             tag: newTag,
             message: `Created new tag ${newTag}`,
             object: sha,
-            type: 'commit',
-            tagger: {
-                name: 'Monalisa Octocat',
-                email: 'octocat@github.com'
-            }
+            type: 'commit'
         });
         console.log(response);
     } catch (error) {
