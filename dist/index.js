@@ -9711,7 +9711,7 @@ const main = async () => {
     try {
         const prefix = core.getInput('prefix', { required: true });
         const major = core.getInput('major', { required: true });
-        const minor = core.getInput('minor');
+        const minor = core.getInput('minor', { required: true });
         const token = core.getInput('token', { required: true });
 
         console.log(`Created a tag with profix "${prefix}${major}."`);

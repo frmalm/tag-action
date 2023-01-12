@@ -4,14 +4,17 @@ inputs:
   prefix:
     description: 'Prefix on tag'
     required: true
-    default: 'v'
+    default: "v"
   major:
     description: 'Major release version'
     required: true
+  minor:
+    description: 'Major release version'
+    required: true
+    default: 0
   token:
     description: 'The token to use to access the GitHub API'
     required: true
-    default: '0'
 
 runs:
   using: 'node16'
