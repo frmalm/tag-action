@@ -2,7 +2,7 @@ const core = require('@actions/core');
 const github = require('@actions/github');
 
 function getNextBuild(prefix, major, minor, tagNames) {
-    console.debug(`All tags found in repository "${tagNames}."`);
+    console.trace(`All tags found in repository "${tagNames}."`);
 
     next = minor
     for(let tag of tagNames) {
@@ -26,12 +26,12 @@ const main = async () => {
         const token = core.getInput('token', { required: true });
 
         console.log(`Created a tag with sequence starting at "${prefix}${major}.${minor}"`);
-        console.debug(`The event payload: ${JSON.stringify(github.context.payload, undefined, 2)}`);
+        console.trace(`The event payload: ${JSON.stringify(github.context.payload, undefined, 2)}`);
 
         const octokit = new github.getOctokit(token);
         const [owner, repo] = github.context.payload.repository.full_name.split("/")
 
-        console.log(`tags_url: ${github.context.payload.repository.tags_url}`);
+        //console.log(`tags_url: ${github.context.payload.repository.tags_url}`);
         const tags = await octokit.request(github.context.payload.repository.tags_url)
         var tagNames = tags.data.map(function(tag) {
             return tag.name
