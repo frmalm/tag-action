@@ -1,9 +1,8 @@
 const core = require('@actions/core');
 const github = require('@actions/github');
 
-
 function getNextBuild(prefix, major, minor, tagNames) {
-    console.log(tagNames);
+    console.debug(`All tags found in repository "${tagNames}."`);
 
     next = minor
     for(let tag of tagNames) {
@@ -15,6 +14,7 @@ function getNextBuild(prefix, major, minor, tagNames) {
             }
         }
     }
+    console.debug("Next build number : " + next)
     return next
 }
 
@@ -25,53 +25,34 @@ const main = async () => {
         const minor = core.getInput('minor', { required: true });
         const token = core.getInput('token', { required: true });
 
-        console.log(`First tag in sequence "${prefix}${major}.${minor}"`);
+        console.log(`Created a tag with sequence starting at "${prefix}${major}.${minor}"`);
+        console.debug(`The event payload: ${JSON.stringify(github.context.payload, undefined, 2)}`);
 
         const octokit = new github.getOctokit(token);
-        
-        // Get the JSON webhook payload for the event that triggered the workflow
-        const payload = JSON.stringify(github.context.payload, undefined, 2)
-        console.log(`The event payload: ${payload}`);
-        
         const [owner, repo] = github.context.payload.repository.full_name.split("/")
+
+        console.log(`tags_url: ${github.context.payload.repository.tags_url}`);
         const tags = await octokit.request(github.context.payload.repository.tags_url)
-        //console.log(tags.data);
-        
         var tagNames = tags.data.map(function(tag) {
             return tag.name
         });
-        
         const nextBuildNumber = getNextBuild(prefix, major, minor, tagNames);
         
-        let sha = github.context.payload.after;
-        if (sha == undefined) {
-            const refResponse = await octokit.request('GET /repos/{owner}/{repo}/git/heads/{ref}', {
-                owner : owner,
-                repo : repo,
-                ref: github.context.payload.ref,
-            });
-
-            console.log(`The event refResponse: ${refResponse}`);
-            
-            sha = refResponse.object.sha;
-        }
-        
+        const sha = github.context.payload.after
         const newTag = prefix + major + "." + nextBuildNumber;
 
+        console.log(`Creating new tag : ${newTag} for ${sha}`);
 
-        console.log(`New tag : ${newTag} for ${sha}`);
-        
         const response = await octokit.request('POST /repos/{owner}/{repo}/git/refs', {
             owner : owner,
             repo : repo,
             ref: `refs/tags/${newTag}`,
             sha: sha,
         });
-        console.log(response);
+        console.debug(response);
     } catch (error) {
         core.setFailed(error.message);
     }
 }
 
-// Call the main function to run the action
 main();
