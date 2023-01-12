@@ -29,7 +29,7 @@ Example: 2 => v1.2 or 113 => v2.113
 ## Example usage
 
 ```yaml
-name: Tag main branch with my-repo-v10.x
+name: Tag main branch with my-repo-v11.x
 on:
   push:
     branches:
