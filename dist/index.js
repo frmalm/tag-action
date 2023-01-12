@@ -9688,7 +9688,7 @@ const core = __nccwpck_require__(2186);
 const github = __nccwpck_require__(5438);
 
 function getNextBuild(prefix, major, minor, tagNames) {
-    console.debug(`All tags found in repository "${tagNames}"`);
+    core.debug(`All tags found in repository "${tagNames}"`);
 
     next = minor
     for(let tag of tagNames) {
@@ -9711,10 +9711,8 @@ const main = async () => {
         const minor = core.getInput('minor', { required: true });
         const token = core.getInput('token', { required: true });
         
-        core.info("##")
-
-        console.log(`Created a tag with sequence starting at "${prefix}${major}.${minor}"`);
-        console.log(`The event payload: ${JSON.stringify(github.context.payload, undefined, 2)}`);
+        core.info(`Created a tag with sequence starting at "${prefix}${major}.${minor}"`);
+        core.debug(`The event payload: ${JSON.stringify(github.context.payload, undefined, 2)}`);
 
         const octokit = new github.getOctokit(token);
         const [owner, repo] = github.context.payload.repository.full_name.split("/")
@@ -9729,7 +9727,7 @@ const main = async () => {
         const sha = github.context.payload.after
         const newTag = prefix + major + "." + nextBuildNumber;
 
-        console.log(`Creating new tag : ${newTag} for ${sha}`);
+        core.info(`Creating new tag : ${newTag} for ${sha}`);
 
         const response = await octokit.request('POST /repos/{owner}/{repo}/git/refs', {
             owner : owner,
@@ -9737,7 +9735,7 @@ const main = async () => {
             ref: `refs/tags/${newTag}`,
             sha: sha,
         });
-        console.debug(response);
+        core.debug(response);
     } catch (error) {
         core.setFailed(error.message);
     }
