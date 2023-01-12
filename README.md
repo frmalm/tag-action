@@ -39,7 +39,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: frmalm/tag-action@v1.1.1
+      - uses: frmalm/tag-action@v1.1
         with:  
           prefix: my-repo-v
           major: 11
