@@ -56,7 +56,7 @@ const main = async () => {
             owner : owner,
             repo : repo,
             ref: `refs/tags/${newTag}`,
-            object: sha,
+            sha: sha,
         });
         console.log(response);
     } catch (error) {
