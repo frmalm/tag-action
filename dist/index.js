@@ -9688,7 +9688,7 @@ const core = __nccwpck_require__(2186);
 const github = __nccwpck_require__(5438);
 
 function getNextBuild(prefix, major, minor, tagNames) {
-    console.trace(`All tags found in repository "${tagNames}."`);
+    console.debug(`All tags found in repository "${tagNames}"`);
 
     next = minor
     for(let tag of tagNames) {
@@ -9710,6 +9710,8 @@ const main = async () => {
         const major = core.getInput('major', { required: true });
         const minor = core.getInput('minor', { required: true });
         const token = core.getInput('token', { required: true });
+        
+        core.debug("##")
 
         console.log(`Created a tag with sequence starting at "${prefix}${major}.${minor}"`);
         console.trace(`The event payload: ${JSON.stringify(github.context.payload, undefined, 2)}`);
