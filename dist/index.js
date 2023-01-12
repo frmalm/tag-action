@@ -9711,10 +9711,10 @@ const main = async () => {
         const minor = core.getInput('minor', { required: true });
         const token = core.getInput('token', { required: true });
         
-        core.debug("##")
+        core.info("##")
 
         console.log(`Created a tag with sequence starting at "${prefix}${major}.${minor}"`);
-        console.trace(`The event payload: ${JSON.stringify(github.context.payload, undefined, 2)}`);
+        console.log(`The event payload: ${JSON.stringify(github.context.payload, undefined, 2)}`);
 
         const octokit = new github.getOctokit(token);
         const [owner, repo] = github.context.payload.repository.full_name.split("/")
