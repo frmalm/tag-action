@@ -45,7 +45,7 @@ const main = async () => {
         
         let sha = github.context.payload.after;
         if (sha == undefined) {
-            const refResponse = await octokit.request('GET /repos/{owner}/{repo}/git/ref/{ref}', {
+            const refResponse = await octokit.request('GET /repos/{owner}/{repo}/git/heads/{ref}', {
                 owner : owner,
                 repo : repo,
                 ref: github.context.payload.ref,
