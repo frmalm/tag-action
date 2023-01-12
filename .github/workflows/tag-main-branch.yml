@@ -1,0 +1,15 @@
+name: Tag main branch with v1.x
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: frmalm/tag-action@main
+        with:
+          prefix: v
+          major: 1
+          token: ${{ secrets.GIT_HUB_TOKEN }}
