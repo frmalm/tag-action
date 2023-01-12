@@ -9693,9 +9693,7 @@ function getNextBuild(prefix, major, minor, tagNames) {
 
     next = minor
     for(let tag of tagNames) {
-        //console.log(tag)
         let fullPrefix = prefix + major + "."
-        //console.log(fullPrefix)
         if(tag.startsWith(fullPrefix)) {
             build = Number(tag.substring(fullPrefix.length))
             if(build >= next) {
@@ -9703,7 +9701,6 @@ function getNextBuild(prefix, major, minor, tagNames) {
             }
         }
     }
-    //console.log("Next build number : " + next)
     return next
 }
 
@@ -9714,15 +9711,14 @@ const main = async () => {
         const minor = core.getInput('minor', { required: true });
         const token = core.getInput('token', { required: true });
 
-        console.log(`Created a tag with profix "${prefix}${major}."`);
+        console.log(`First tag in sequence "${prefix}${major}.${minor}"`);
 
         const octokit = new github.getOctokit(token);
         
         // Get the JSON webhook payload for the event that triggered the workflow
         const payload = JSON.stringify(github.context.payload, undefined, 2)
         console.log(`The event payload: ${payload}`);
-        console.log(`tags_url: ${github.context.payload.repository.tags_url}`);
-
+        
         const [owner, repo] = github.context.payload.repository.full_name.split("/")
         const tags = await octokit.request(github.context.payload.repository.tags_url)
         //console.log(tags.data);
@@ -9732,7 +9728,17 @@ const main = async () => {
         });
         
         const nextBuildNumber = getNextBuild(prefix, major, minor, tagNames);
-        const sha = github.context.payload.after
+        
+        let sha = github.context.payload.after;
+        if (sha == undefined) {
+            const refResponse = await octokit.request('GET /repos/{owner}/{repo}/git/ref/{ref}', {
+                owner : owner,
+                repo : repo,
+                ref: github.context.payload.ref,
+            });
+            
+            sha = refResponse.object.sha;
+        }
         
         const newTag = prefix + major + "." + nextBuildNumber;
 
