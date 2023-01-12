@@ -3,6 +3,7 @@ description: 'Create a tag in for new commit'
 inputs:
   prefix:
     description: 'Prefix on tag'
+    required: true
     default: 'v'
   major:
     description: 'Major release version'
@@ -10,6 +11,7 @@ inputs:
   token:
     description: 'The token to use to access the GitHub API'
     required: true
+    default: 1
 
 runs:
   using: 'node16'

@@ -9688,10 +9688,10 @@ const core = __nccwpck_require__(2186);
 const github = __nccwpck_require__(5438);
 
 
-function getNextBuild(prefix, major, tagNames) {
+function getNextBuild(prefix, major, minor, tagNames) {
     console.log(tagNames);
 
-    next = 1
+    next = minor
     for(let tag of tagNames) {
         //console.log(tag)
         let fullPrefix = prefix + major + "."
@@ -9709,8 +9709,9 @@ function getNextBuild(prefix, major, tagNames) {
 
 const main = async () => {
     try {
-        const prefix = core.getInput('prefix');
+        const prefix = core.getInput('prefix', { required: true });
         const major = core.getInput('major', { required: true });
+        const minor = core.getInput('minor', { required: true });
         const token = core.getInput('token', { required: true });
 
         console.log(`Created a tag with profix "${prefix}${major}."`);
@@ -9730,7 +9731,7 @@ const main = async () => {
             return tag.name
         });
         
-        const nextBuildNumber = getNextBuild(prefix, major, tagNames);
+        const nextBuildNumber = getNextBuild(prefix, major, minor, tagNames);
         const sha = github.context.payload.after
         
         const newTag = prefix + major + "." + nextBuildNumber;

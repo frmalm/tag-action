@@ -1,12 +1,12 @@
 # Tag Branch - Javascript Action
 
-This action prints "Hello World" or "Hello" + the name of a person to greet to the log.
+Action creates tag on a branch with specified prefix and number sequence.
 
 ## Inputs
 
 ### `prefix`
 
-The name of the person to greet. Default `"v"`. 
+**Required** The name of the person to greet. Default `"v"`. 
 
 Example: v => v10.1 or tag-action-v => tag-action-v1.3
 
@@ -16,15 +16,15 @@ Example: v => v10.1 or tag-action-v => tag-action-v1.3
 
 Example: 10 => v10.1 or 2 => v2.34
 
+### `minor`
+
+**Required** Minor version to start sequence at. Default `"1"`
+
+Example: 2 => v1.2 or 113 => v2.113
+
 ### `token`
 
 **Required** Token for accessing repository.
-
-## Outputs
-
-### `time`
-
-The time we greeted you.
 
 ## Example usage
 
