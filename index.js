@@ -52,13 +52,11 @@ const main = async () => {
 
         console.log(`New tag : ${newTag} for ${sha}`);
         
-        const response = await octokit.request('POST /repos/{owner}/{repo}/git/tags', {
+        const response = await octokit.request('POST /repos/{owner}/{repo}/git/refs', {
             owner : owner,
             repo : repo,
-            tag: newTag,
-            message: `Created new tag ${newTag}`,
+            ref: `refs/tags/${newTag}`,
             object: sha,
-            type: 'commit'
         });
         console.log(response);
     } catch (error) {
