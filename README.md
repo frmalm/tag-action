@@ -18,7 +18,7 @@ Example: 10 => v10.1 or 2 => v2.34
 
 ### `minor`
 
-**Required** Minor version to start sequence at. Default `"0"`
+**Required** Minor version to start sequence at. Default `"0"`.
 
 Example: 2 => v1.2 or 113 => v2.113
 
