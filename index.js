@@ -23,7 +23,7 @@ function getNextBuild(prefix, major, tagNames) {
 
 const main = async () => {
     try {
-        const prefix = core.getInput('prefix', { required: true });
+        const prefix = core.getInput('prefix');
         const major = core.getInput('major', { required: true });
         const token = core.getInput('token', { required: true });
 

@@ -3,7 +3,7 @@ description: 'Create a tag in for new commit'
 inputs:
   prefix:
     description: 'Prefix on tag'
-    required: true
+    default: 'v'
   major:
     description: 'Major release version'
     required: true
