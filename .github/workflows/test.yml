@@ -16,8 +16,6 @@ jobs:
 
       - name: Echo
         run: |
-          ref = "${{ val/\//- }}"
           echo "val1 : ${{ val }}"
-          echo "val2 : ${{ val/\//- }}"
-          echo "ref : ${{ ref }}"
+
           
