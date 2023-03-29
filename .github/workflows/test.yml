@@ -15,7 +15,7 @@ jobs:
     steps:
       - name: Echo
         run: |
-          REFF="${{ github.event.inputs.val /\//+}}"
+          REFF="${{ github.event.inputs.val }}"
           REF="${REFF/\//-}"
           echo "ref : ${REF}"
 
