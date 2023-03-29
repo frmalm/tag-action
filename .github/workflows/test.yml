@@ -1,0 +1,23 @@
+on:
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+    inputs:
+      val:
+        type: string
+        description: Release tag, branch, commit
+        default: support/v1
+
+jobs:
+  build:
+
+    using: 'node16'
+    steps:
+
+      - name: Echo
+        run: |
+          ref = "${{ val/\//- }}"
+          echo "val1 : ${{ val }}"
+          echo "val2 : ${{ val/\//- }}"
+          echo "ref : ${{ ref }}"
+          
