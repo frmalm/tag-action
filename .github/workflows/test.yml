@@ -1,3 +1,4 @@
+name: 'test val replacement'
 on:
 
   # Allows you to run this workflow manually from the Actions tab
@@ -10,10 +11,8 @@ on:
 
 jobs:
   build:
-
-    using: 'node16'
+    runs-on: 'node16'
     steps:
-
       - name: Echo
         run: |
           val = github.event.inputs.ref
