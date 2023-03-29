@@ -16,6 +16,7 @@ jobs:
 
       - name: Echo
         run: |
-          echo "val1 : ${{ val }}"
+          val = github.event.inputs.ref
+          echo "val1 : ${{ github.event.inputs.ref }}"
 
           
