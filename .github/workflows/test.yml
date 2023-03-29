@@ -18,5 +18,12 @@ jobs:
           REFF=${{ github.event.inputs.val }}
           REF="${REFF/\//-}" 
           echo "ref : ${REF}"
+          
+              runs-on: [ large, telia-managed, Linux, X64 ]
+
+      - name: Use Branch Workflows
+        run: |
+          echo "Use script in branch support/v1"
+          exit 1
 
           
