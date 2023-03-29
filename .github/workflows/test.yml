@@ -19,7 +19,6 @@ jobs:
           REF="${REFF/\//-}" 
           echo "ref : ${REF}"
           
-              runs-on: [ large, telia-managed, Linux, X64 ]
 
       - name: Use Branch Workflows
         run: |
